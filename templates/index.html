@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<script src="https://api-maps.yandex.ru/2.1/?apikey=13c33dcd-da85-4147-96a8-12e4918283e1&lang=ru_RU" type="text/javascript">
+	</script>
+	<title>Hello, world!</title>
+</head>
+<body>
+<div class="container mt-4">
+	<div class="jumbotron bg-primary text-white">
+
+		<h1>Сервис автоматически оценит стоимость вашей квартиры в Минске</h1>
+		<p class="lead">Алгоритмы машинного обучения проанализировали тысячи свежих объявлений о продаже квартир в Минске и мгновенно дают ответ.
+			Без регистрации, email и прочего.</p>
+	</div>
+</div>
+<div class="container">
+	<form action="/predict" method="post" id="main-form">
+		<div class="row">
+			<div class="col-12 text-center">
+				<p>Выберите, сколько комнат в квартире:</p>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn-lg btn btn-outline-success">
+						<input type="radio" value="0" name="rooms" id="option1" autocomplete="off"> 1
+					</label>
+					<label class="btn-lg btn btn-outline-success active">
+						<input type="radio" value="1" name="rooms" id="option2" autocomplete="off" checked> 2
+					</label>
+					<label class="btn-lg btn btn-outline-success">
+						<input type="radio" value="2" name="rooms" id="option3" autocomplete="off"> 3
+					</label>
+					<label class="btn-lg btn btn-outline-success">
+						<input type="radio" value="3" name="rooms" id="option4" autocomplete="off"> 4
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row my-4">
+			<div class="col-12 text-center">
+				<div class="form-group">
+					<label for="area-total">Площадь всей квартиры, м<sup>2</sup></label>
+					<input type="text" value="53" class="form-control col-md-4 offset-md-4" id="area-total" name="area-total" placeholder="0" required>
+				</div>
+				<div class="form-group">
+					<label for="area-kitchen">Площадь кухни, м<sup>2</sup></label>
+					<input type="text" value="9" class="form-control col-md-4 offset-md-4" id="area-kitchen" name="area-kitchen" placeholder="0" required>
+				</div>
+
+
+				<div class="form-inline text-center">
+
+					<div class="col-md-8 offset-md-2">
+						<label for="floor" class="text-center mb-2">Этаж квартиры / сколько всего этажей в доме</label>
+						<input type="text" class="form-control" id="floor" name="floor" placeholder="0" required value="7"> / <input type="text" class="form-control" id="number-of-floors" name="number-of-floors" placeholder="0" required value="9">
+					</div>
+				</div>
+
+
+				<div class="col-12 text-center">
+					<div class="btn-group btn-group-toggle my-4" data-toggle="buttons">
+
+						<label class="btn btn-outline-success active">
+							<input type="radio" value="0" name="is-new" id="is-new1" autocomplete="off" checked> Вторичка
+						</label>
+						<label class="btn btn-outline-success">
+							<input type="radio" value="1" name="is-new" id="is-new2" autocomplete="off"> Новостройка
+						</label>
+
+					</div>
+				</div>
+				<div class="col-12 text-center">
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-outline-success">
+							<input type="radio" value="0" name="is-renovated" id="is-renovated1" autocomplete="off"> Без отделки
+						</label>
+						<label class="btn btn-outline-success active">
+							<input type="radio" value="1" name="is-renovated" id="is-renovated2" autocomplete="off" checked> С отделкой
+						</label>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<hr/>
+
+		<div class="row mt-5">
+			<div class="col-12 text-center">
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn-lg btn btn-outline-success active">
+						<input type="radio" value="1" name="balcony" id="balcony1" autocomplete="off" checked> Балкон (лоджия) есть
+					</label>
+					<label class="btn-lg btn btn-outline-success">
+						<input type="radio" value="0" name="balcony" id="balcony0" autocomplete="off"> Балкона (лоджии) нет
+					</label>
+				</div>
+			</div>
+
+			<div class="col-12 text-center my-4">
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn btn-outline-success">
+						<input type="radio" value="1" name="parking" id="parking1" autocomplete="off"> Есть выделенное парковочное место
+					</label>
+					<label class="btn btn-outline-success active">
+						<input type="radio" value="0" name="parking" id="parking0" autocomplete="off" checked> Выделенной парковки нет
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<hr/>
+
+		<div class="row">
+
+
+			<div class="col-12 text-center  my-4">
+				<p>Тип дома
+					<small>(если не знаете, оставьте "Панельный", их большинство)</small>
+				</p>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+					<label class="btn btn-outline-success active">
+						<input type="radio" value="3" name="house-type" id="house-type1" autocomplete="off" checked> Панельный
+					</label>
+					<label class="btn btn-outline-success">
+						<input type="radio" value="1" name="house-type" id="house-type2" autocomplete="off"> Кирпичный
+					</label>
+					<label class="btn btn-outline-success">
+						<input type="radio" value="0" name="house-type" id="house-type3" autocomplete="off"> Блочный
+					</label>
+					<label class="btn btn-outline-success">
+						<input type="radio" value="2" name="house-type" id="house-type4" autocomplete="off"> Монолитный
+					</label>
+				</div>
+
+				<div class="form-group  my-4">
+					<label for="year">Год постройки (хотя бы примерно)</label>
+					<input type="text" name="year" class="form-control col-md-4 offset-md-4" id="year" placeholder="Полностью, 19xx или 20xx" value="2000" required>
+				</div>
+
+			</div>
+
+		</div>
+
+		<hr/>
+
+		<div class="row my-4">
+			<div class="col-12 text-center">
+				<p>Адрес дома (нужен для вычисления координат, расстояния до центра города и до метро)</p>
+
+				<div class="text-left col-md-6 offset-md-3 my-4">
+					<input class="form-control" value="Слободская 177" type="text" placeholder="Начните вводить адрес" id="address" autocomplete="off" required>
+					<input type="text" name="latitude" id="latitude" class="d-none" required>
+					<input type="text" name="longitude" id="longitude" class="d-none"  required>
+				</div>
+
+
+			</div>
+			<div class="col-md-6 offset-md-3">
+				<div id="map" style=" height: 400px;"></div>
+			</div>
+		</div>
+
+		<div class="row my-4">
+			<div class="col-md-6 offset-md-3 text-center">
+				<div class="jumbotron">
+					<img src="{{ url_for('static', filename='loader.svg') }}" id="loader" style="display: none; width: 48px">
+					<span class="h1" id="result-block">$ <span id="result">0</span></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row my-4">
+			<div class="col-12 text-center">
+				<button id="submit-button" type="button" class="btn btn-lg btn-success">Рассчитать стоимость квратиры</button>
+			</div>
+		</div>
+
+
+	</form>
+
+</div>
+
+<div class="bg-light">
+	<footer class="container py-4">
+		<div class="row">
+			<div class="col-md-4 small">
+				<p>Сервис сделал Алексей Ярошенко, чтобы ему было, что показать, когда он будет устраиваться на работу Machine Learning инженером или дата сайнтистом. Открыт к предложениям :)</p>
+				<ul>
+					<li><a href="https://www.linkedin.com/in/alekseyyaroshenko/" target="_blank">LinkedIn</a></li>
+					<li><a href="https://www.facebook.com/alexey.yaroshenko" target="_blank">Facebook</a></li>
+					<li><a href="https://t.me/yaroshenko" target="_blank">Telegram</a> (лучше писать сюда)</li>
+					<li>Email: <a href="mailto:aleksey@yaroshenko.by">aleksey@yaroshenko.by</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+
+	ymaps.ready(init);
+	var placemark = false;
+
+	function init() {
+
+
+		var myMap = new ymaps.Map('map', {
+			center: [53.90210688, 27.56172538],
+			zoom: 11,
+			controls: [],
+
+
+		}, {
+			suppressMapOpenBlock: true,
+			maxZoom: 11,
+			minZoom: 11,
+			yandexMapDisablePoiInteractivity: true,
+			restrictMapArea: true,
+		});
+
+
+		var suggestView = new ymaps.SuggestView('address', {
+			boundedBy: [[53.820922446131, 27.344970703125], [53.97547425743, 27.77961730957]]
+		})
+
+
+		suggestView.events.add('select', function (event) {
+			var address = event.get('item').value
+			ymaps.geocode(address).then(function (res) {
+				var latlng = res.geoObjects.get(0).geometry.getCoordinates();
+
+				if (placemark) {
+					myMap.geoObjects.remove(placemark);
+				}
+
+				placemark = new ymaps.Placemark(latlng, {}, {
+					preset: 'islands#blueHomeIcon',
+					iconColor: '#007bff'
+				});
+
+				myMap.geoObjects.add(placemark);
+
+				document.getElementById('latitude').value = latlng[0];
+				document.getElementById('longitude').value = latlng[1];
+
+				console.log(latlng)
+			});
+		});
+
+
+	}
+
+
+</script>
+
+<script>
+	$('#submit-button').click(function () {
+		if ($('#main-form')[0].checkValidity()) {
+			$('#result-block').hide()
+			$('#loader').show()
+			$.ajax({
+				type: 'POST',
+				url: '/predict',
+				data: $('#main-form').serialize(),
+				success: function (msg) {
+					$('#result-block').show()
+					$('#loader').hide()
+					res_text = parseFloat(msg).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+					$('#result').text(res_text)
+					// alert(msg)
+				}
+			});
+		} else {
+			alert('Заполните, пожалуйста, все поля и адрес')
+		}
+	})
+</script>
+</body>
+</html>
