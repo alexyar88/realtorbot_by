@@ -1,6 +1,0 @@
-*.pkl
-*.csv
-/venv
-/ml_models
-.idea
-/.idea
