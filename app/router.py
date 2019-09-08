@@ -1,11 +1,9 @@
-from flask import Flask, render_template, request, url_for
-import os
+from flask import Flask, render_template, request, jsonify
 import joblib
 import numpy as np
 import pandas as pd
 import time
 from pathlib import Path
-import json
 from dist_helpers import dist_center, dist_metro
 
 tempalte_dir = '../templates'
@@ -15,30 +13,13 @@ file_path = str(Path(__file__).parent.absolute())
 
 app = Flask(__name__, template_folder=tempalte_dir, static_folder=static_dir)
 
-# app = Flask(__name__)
-
 @app.route('/')
 def index():
-    # print(tempalte_dir)
     return render_template('index.html')
-
-@app.route('/test')
-def test():
-    arr = os.listdir(file_path)
-    print(arr)
-    print('=====')
-    arr2 = os.listdir(file_path + '/../')
-    print(arr2)
-    print('=====')
-    arr3 = os.listdir(file_path + '/../ml_models/')
-
-    path_str = '<br/>' + str(arr) + '<br/>' + str(arr2) + '<br/>' + str(arr3)
-    return path_str
 
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    print(request.form['latitude'])
 
     latitude = float(request.form['latitude'])
     longitude = float(request.form['longitude'])
@@ -58,13 +39,10 @@ def predict():
     dist_from_metro = dist_metro(latitude, longitude)
     first_floor = int(floor == 1)
     last_floor = int(floor == number_of_floors)
-    # rooms_ohe = [0] * 4
-    # rooms_ohe[rooms] = 1
     house_type_ohe = [0] * 4
     house_type_ohe[house_type] = 1
     flat_type_ohe = [0] * 4
 
-    # print(house_type_ohe)
 
     if is_new:
         if is_renovated:
@@ -94,7 +72,6 @@ def predict():
         year,
         first_floor,
         last_floor,
-        # *rooms_ohe,
         *flat_type_ohe,
         *house_type_ohe,
 
@@ -104,7 +81,6 @@ def predict():
 
     X = np.array([X_arr])
 
-    # X_my = np.array([[53.8461849, 27.469189099999994, 1, 7, 9, 53, 9, 1, 0, 0.10922904145153806, np.log(0.005066596948651071), 2000, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0]])
     columns = ['latitude', 'longitude', 'floor', 'number_of_floors', 'number_of_rooms',
        'area_total', 'area_kitchen', 'balcony', 'parking', 'dist_from_center',
        'dist_from_metro', 'year', 'first_floor', 'last_floor',
@@ -117,24 +93,21 @@ def predict():
 
     X = pd.DataFrame(X, columns=columns)
 
-    # print(os.getcwd() + '/../ml_models/scaler_model.pkl')
-
     scaler = joblib.load(file_path + '/../ml_models/scaler_model.pkl')
     columns_to_scale = ['latitude', 'longitude', 'dist_from_metro', 'dist_from_center']
     X[columns_to_scale] = scaler.transform(X[columns_to_scale])
 
     model = joblib.load(file_path + '/../ml_models/voter_model.pkl')
-    price = model.predict(X)[0]
+    price = model.predict(X)[0] * 0.97  # обычно, 3% в среднем скидывает продавец
 
 
     time.sleep(0.3)
 
 
-    # return json.dump({
-    #     'price': price,
-    #     'square_price': price / area_total
-    # })
-    return str(price * 0.98)
+    return jsonify({
+        'price': price,
+        'square_price': price / area_total
+    })
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
