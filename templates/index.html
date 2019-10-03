@@ -40,7 +40,7 @@
 
 
             </div>
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 offset-md-3" id="map-container">
                 <div id="map" style=" height: 400px;"></div>
             </div>
         </div>
@@ -115,15 +115,15 @@
         </div>
 
 
-        <hr/>
+        <!--<hr/>-->
 
         <div class="row mt-5">
             <div class="col-12 text-center">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn-lg btn btn-outline-primary active">
+                    <label class="btn btn-outline-primary active">
                         <input type="radio" value="1" name="balcony" id="balcony1" autocomplete="off" checked> Балкон (лоджия) есть
                     </label>
-                    <label class="btn-lg btn btn-outline-primary">
+                    <label class=" btn btn-outline-primary">
                         <input type="radio" value="0" name="balcony" id="balcony0" autocomplete="off"> Балкона (лоджии) нет
                     </label>
                 </div>
@@ -153,16 +153,16 @@
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
                     <label class="btn btn-outline-primary active">
-                        <input type="radio" value="3" name="house-type" id="house-type1" autocomplete="off" checked> Панельный
+                        <input type="radio" value="panel" name="house-type" id="house-type1" autocomplete="off" checked> Панельный
                     </label>
                     <label class="btn btn-outline-primary">
-                        <input type="radio" value="1" name="house-type" id="house-type2" autocomplete="off"> Кирпичный
+                        <input type="radio" value="brick" name="house-type" id="house-type2" autocomplete="off"> Кирпичный
                     </label>
                     <label class="btn btn-outline-primary">
-                        <input type="radio" value="0" name="house-type" id="house-type3" autocomplete="off"> Блочный
+                        <input type="radio" value="block" name="house-type" id="house-type3" autocomplete="off"> Блочный
                     </label>
                     <label class="btn btn-outline-primary">
-                        <input type="radio" value="2" name="house-type" id="house-type4" autocomplete="off"> Монолитный
+                        <input type="radio" value="monolit" name="house-type" id="house-type4" autocomplete="off"> Монолитный
                     </label>
                 </div>
 
@@ -279,6 +279,7 @@
 
 				document.getElementById('latitude').value = latlng[0];
 				document.getElementById('longitude').value = latlng[1];
+				$('#map-container').show()
 
 				console.log(latlng)
 			});
