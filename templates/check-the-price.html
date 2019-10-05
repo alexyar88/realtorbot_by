@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>RealtorBot</title>
+
+    <meta charset="utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="/static/style.css" type="text/css" rel="stylesheet">
+    <link href="/static/form-style.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700|Space+Mono:400,700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="page-container container-form">
+
+    <header>
+        {%include 'header-menu.html' %}
+    </header>
+
+    <main>
+
+        <div>
+            <h1 class="one-line-heading">Оценка стоимости квартиры</h1>
+        </div>
+
+        <div class="grid form-grid">
+
+            <div class="left-column">
+
+                <p class="big-margin-bottom-p">База данных объявлений о продаже квартир автоматически обновляется каждую
+                    неделю. Чем больше параметров вы укажете, тем
+                    точнее получится оценка. Адрес дома нужно заполнить обязательно
+                </p>
+
+                <form id="main-form">
+
+
+                    <div class="grid-element adress-field">
+                        <label for="address">Адрес дома <span class="superscript">*</span></label>
+                        <br>
+                        <input type="text" name="address" id="address" value="{{address}}">
+                        <input type="hidden" name="latitude" id="latitude" value="{{lat}}">
+                        <input type="hidden" name="longitude" id="longitude" value="{{long}}">
+                    </div>
+
+
+                    <div class="grid-element year-field">
+                        <label for="year">Год постройки</label>
+                        <br>
+                        <select class="custom-select" name="year" id="year">
+                            <option disabled selected>Выберите год</option>
+                            <option value="1915">1920е и раньше</option>
+                            <option value="1925">1920е – 1930e</option>
+                            <option value="1935">1930е – 1940e</option>
+                            <option value="1945">1940е – 1950e</option>
+                            <option value="1955">1950е – 1960e</option>
+                            <option value="1965">1960е – 1970e</option>
+                            <option value="1975">1970е – 1980e</option>
+                            <option value="1985">1980е – 1990e</option>
+                            <option value="1995">1990е – 2000e</option>
+                            <option value="2005">2000е – 2010e</option>
+                            <option value="2015">2010е – 2020e</option>
+                        </select>
+                        <p>Ориентировочно</p>
+                    </div>
+
+                    <div class="grid-element exact-year-field">
+                        <label for="exact-year">Точный год</label>
+                        <br>
+                        <input type="number" name="exact-year" id="exact-year" placeholder="xxxx">
+                        <p>Если знаете, прогноз будет точнее</p>
+                    </div>
+
+
+                    <div class="grid-element number-of-rooms-field">
+                        <label for="number-of-rooms">Количество комнат</label>
+                        <br>
+                        <span class="toggle-buttons" id="number-of-rooms">
+                            <input type="radio" name="rooms" value="1" id="room1">
+                            <label for="room1"> 1 </label>
+
+                            <input type="radio" name="rooms" value="2" id="room2">
+                            <label for="room2"> 2 </label>
+
+                            <input type="radio" name="rooms" value="3" id="room3">
+                            <label for="room3"> 3 </label>
+
+                            <input type="radio" name="rooms" value="4" id="room4">
+                            <label for="room4"> 4 </label>
+                        </span>
+                    </div>
+
+
+                    <div class="grid-element floor-fields">
+                        <div class="floor-field">
+                            <label for="floor">Этаж</label>
+                            <br>
+                            <input type="number" name="floor" id="floor">
+                        </div>
+
+                        <div class="floor-num-field">
+                            <label for="floor-num">Этажность дома</label>
+                            <br>
+                            <input type="number" name="number-of-floors" id="floor-num">
+                        </div>
+                    </div>
+
+                    <div class="grid-element type-of-house-field">
+                        <label for="type-of-house">Тип дома</label>
+                        <br>
+                        <span class="toggle-buttons" id="type-of-house">
+                            <input type="radio" name="house-type" value="panel" id="type1">
+                            <label for="type1">Панельный</label>
+
+                            <input type="radio" name="house-type" value="brick" id="type2">
+                            <label for="type2">Кирпичный</label>
+
+                            <input type="radio" name="house-type" value="block" id="type3">
+                            <label for="type3">Блочный</label>
+
+                            <input type="radio" name="house-type" value="monolit" id="type4">
+                            <label for="type4">Монолитный</label>
+                        </span>
+                    </div>
+
+
+                    <div class="grid-element states">
+                        <div class="state-field">
+                            <label for="state">Состояние</label>
+                            <br>
+                            <span class="toggle-buttons" id="state">
+                                <input type="radio" name="is-new" value="0" id="state1">
+                                <label for="state1">Вторичное</label>
+
+                                <input type="radio" name="is-new" value="1" id="state2">
+                                <label for="state2">Новостройка</label>
+                            </span>
+                        </div>
+
+                        <div class="restored-field">
+                            <input type="checkbox" name="is-renovated" value="1" id="restored">
+                            <label for="restored" class="checkbox-label"><span></span> С
+                                отделкой</label>
+                        </div>
+                    </div>
+
+                    <div class="grid-element area-fields">
+                        <div class="flat-area-field">
+                            <label for="flat-area">Площадь квартиры</label>
+                            <br>
+                            <input type="number" name="area-total" id="flat-area">
+                            <span class="unit">м <span class="superscript">2</span></span>
+                        </div>
+
+                        <div class="kitchen-area-field">
+                            <label for="kitchen-area">Площадь кухни</label>
+                            <br>
+                            <input type="number" name="area-kitchen" id="kitchen-area">
+                            <span class="unit">м <span class="superscript">2</span></span>
+                        </div>
+                    </div>
+
+                    <div class="grid-element balcony-field">
+                        <input type="checkbox" name="balcony" value="1" id="balcony">
+                        <label for="balcony" class="checkbox-label"><span></span> Есть лоджия или
+                            балкон</label>
+                    </div>
+
+                    <div class="grid-element parking-field">
+                        <input type="checkbox" name="parking" value="1" id="parking">
+                        <label for="parking" class="checkbox-label"><span></span> Есть выделенное
+                            парковочное место</label>
+                    </div>
+
+                    <div class="grid-element button-field">
+                        <button name="button" type="button" id="submit-button"><span id="button-text">Оценить стоимость</span><img src="/static/images/loader.svg" id="loader" style="display: none; width: 3.2rem"></button>
+
+
+                        <!--<p>0 из 11 параметров заданы</p>-->
+                    </div>
+
+                </form>
+
+
+                <div id="result-block">
+                    <p>Оцениваем в</p>
+                    <h1>~<span id="result">...</span> $</h1>
+                    <p><span id="square-price">...</span> $/м<span class="superscript">2</span></p>
+
+                    <!--<p>Дороже 40% квартир на рынке</p>-->
+
+
+                </div>
+
+            </div>
+
+            <div class="photo">
+                <img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <div class="photo-mobile">
+            <img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>
+        </div>
+
+        {%include 'footer-menu.html' %}
+
+    </footer>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=13c33dcd-da85-4147-96a8-12e4918283e1&lang=ru_RU" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+
+	ymaps.ready(init);
+	var placemark = false;
+
+	function init() {
+
+
+		<!--var myMap = new ymaps.Map('map', {-->
+			<!--center: [53.90210688, 27.56172538],-->
+			<!--zoom: 11,-->
+			<!--controls: [],-->
+
+
+		<!--}, {-->
+			<!--suppressMapOpenBlock: true,-->
+			<!--maxZoom: 11,-->
+			<!--minZoom: 11,-->
+			<!--yandexMapDisablePoiInteractivity: true,-->
+			<!--restrictMapArea: true,-->
+		<!--});-->
+
+
+		var suggestView = new ymaps.SuggestView('address', {
+			boundedBy: [[53.820922446131, 27.344970703125], [53.97547425743, 27.77961730957]]
+		})
+
+
+		suggestView.events.add('select', function (event) {
+			var address = event.get('item').value
+			document.getElementById('address').value = event.get('item').displayName
+			ymaps.geocode(address).then(function (res) {
+			    var geo = res.geoObjects.get(0);
+				var latlng = geo.geometry.getCoordinates();
+				document.getElementById('latitude').value = latlng[0];
+				document.getElementById('longitude').value = latlng[1];
+
+				<!--console.log(geo.properties.get('name'))-->
+
+				<!--if (placemark) {-->
+					<!--myMap.geoObjects.remove(placemark);-->
+				<!--}-->
+
+				<!--placemark = new ymaps.Placemark(latlng, {}, {-->
+					<!--preset: 'islands#blueHomeIcon',-->
+					<!--iconColor: '#007bff'-->
+				<!--});-->
+
+				<!--myMap.geoObjects.add(placemark);-->
+
+
+				<!--$('#map-container').show()-->
+
+				console.log(latlng)
+			});
+		});
+
+
+	}
+
+
+
+
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#submit-button').click(function () {
+            if ($('#main-form')[0].checkValidity()) {
+                $('#button-text').hide()
+                $('#loader').show()
+                $('#result').text('...')
+                $('#square-price').text('...')
+                $.ajax({
+                    type: 'POST',
+                    url: '/predict',
+                    data: $('#main-form').serialize(),
+                    success: function (result) {
+                        $('#button-text').show()
+                        $('#loader').hide()
+                        <!--result = JSON.parse(msg)-->
+                        res_text = parseFloat(result.price).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+                        square_text = parseFloat(result.square_price).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+                        $('#result').text(res_text)
+                        $('#square-price').text(square_text)
+                        // alert(msg)
+                    }
+                });
+            } else {
+                alert('Заполните, пожалуйста, все поля и адрес')
+            }
+        })
+
+        $('#address').focus()
+    })
+
+
+
+
+
+</script>
+</body>
+
+</html>

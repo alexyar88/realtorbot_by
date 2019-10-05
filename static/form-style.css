@@ -1,0 +1,271 @@
+.main-adress-label { /* at start page only */
+  /* FONT */
+  font-size: 1.875rem;
+  font-weight: var(--main-font-bold);
+
+}
+
+form {
+  display: grid;
+  grid-column-gap: var(--grid-form-gap);
+  grid-template-columns: repeat (4, 1fr);
+  /* grid-template-rows: repeat (9, 100px); */
+  width: 100%;
+   /* FONT */
+   font-weight: var(--main-font-regular);
+}
+
+form .grid-element {
+  margin-top: var(--grid-element-margin-top);
+}
+
+form .adress-field {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+}
+
+form .year-field {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+}
+
+form .exact-year-field {
+  grid-column-start: 3;
+  grid-column-end: span 1;
+}
+
+form .number-of-rooms-field {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  /* display: inline-block;
+  width: 60%;
+  margin-right: var(--grid-form-gap); */
+}
+
+
+form .floor-fields {
+  grid-column-start: 3;
+  grid-column-end: span 2;
+}
+
+form .floor-field { 
+  display: inline-block;
+  margin-right: var(--grid-form-gap);
+}
+
+form .floor-num-field {
+  display: inline-block;
+}
+
+form .type-of-house-field {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+}
+
+form .states {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+}
+
+form .state-field {
+  display: inline-block;
+  width: 60%;
+  margin-right: var(--grid-form-gap);
+  /* grid-column-start: 1;
+  grid-column-end: span 2; */
+}
+
+form .restored-field {
+  padding-top: 2.6rem;
+  display: inline-block;
+  /* margin-left: var(--grid-form-gap); */
+  /* grid-column-start: 3;
+  grid-column-end: span 2; */
+}
+
+form .area-fields{
+  grid-column-start: 1;
+  grid-column-end: span 4;
+}
+
+form .flat-area-field {
+  display: inline-block;
+  /* grid-column-start: 1;
+  grid-column-end: span 1; */
+}
+
+form .kitchen-area-field {
+  display: inline-block;
+  margin-left: var(--grid-form-gap);
+  /* grid-column-start: 2;
+  grid-column-end: span 1; */
+}
+
+form .balcony-field {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+}
+
+form .parking-field {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+}
+
+form .button-field {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+}
+
+form p {
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 5px;
+
+  /* FONT */
+  font-size: 0.75rem;
+}
+
+input[type=text],
+input[type=number],
+select {
+  height: var(--input-height);
+  box-sizing: border-box;
+  margin-top: 10px;
+  padding-left: 5px;
+
+  outline: none;
+
+  /* BORDER */
+  border-radius: 2px;
+  border: 1px var(--border-color) solid;
+
+  /* FONT */
+  font-family: var(--main-font);
+  font-size: 1.5rem;
+}
+
+input[type="text"]:focus,
+input[type=number]:focus,
+select:focus {
+   /* BORDER */
+  border: 3px var(--border-color) solid;
+}
+
+input[type=text] {
+  width: 100%;
+
+   /* FONT */
+  font-weight: var(--main-font-bold);
+}
+
+input[type=number] {
+  width: var(--input-number-width);
+
+   /* FONT */
+  font-weight: var(--main-font-light);
+}
+
+
+button {
+  height: var(--input-height);
+  width: 100%;
+  color: var(--main-color);
+
+  /* BORDER */
+  border-radius: 2px;
+  border: 3px var(--main-color) solid;
+  background-color: white;
+
+  /* FONT */
+  font-family: var(--main-font);
+  font-weight: var(--main-font-bold);
+  font-size: 1.875rem;
+}
+
+/* -----SELECT----- */
+
+select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;    
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.custom-select {
+   background: url(icons/down-arrow.svg) 96% / 5% no-repeat;
+   border: 1px var(--border-color) solid;
+   height: var(--input-height);
+   width: 100%;
+   border-radius: 2px;
+
+    /* FONT */
+   font-weight: var(--main-font-light);
+}
+
+/* -----RADIOBUTTONS----- */
+
+.toggle-buttons {
+  clear: both;
+  display: flex;
+  margin-top: 10px;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+ input[type=radio] + label {
+
+    width: 100%;
+    text-align: center;
+    /* padding: .5em 1em; */
+    cursor: pointer;
+    border: 1px var(--border-color) solid;
+    margin-right: -1px;
+    box-sizing: border-box;
+      
+    color: black;
+    background-color: white;
+    height: var(--input-height);
+      
+    font-size: 1.5rem;
+    line-height: 3.35rem;
+    font-weight: var(--main-font-light);
+  }
+
+  input[type=radio]:checked + label {
+
+    background-color: var(--main-color);
+    color: white;
+  }
+
+/* -----CHECKBOX----- */
+
+input[type=checkbox] + label {
+font-size: 1.5rem;
+font-weight: var(--main-font-light);
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    vertical-align: middle;
+    width: var(--checkbox-height-width);
+    height: var(--checkbox-height-width);
+    border: 1px var(--border-color) solid;
+    border-radius: 2px;
+}
+
+input[type="checkbox"]:checked + label span {
+  background: url(icons/checkmark.svg) center / 50% no-repeat;
+  background-color: var(--main-color);
+}
