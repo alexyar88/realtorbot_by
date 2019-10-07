@@ -4,4 +4,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
-CMD ["app/router.py"]
+CMD ["app/run.py"]

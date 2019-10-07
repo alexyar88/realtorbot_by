@@ -79,13 +79,13 @@ def get_X_y():
 
 
 def preprocess_data(X):
-    X['year'] = X['house_type'].str.extract('(\d+)')
+    # X['year'] = X['house_type'].str.extract('(\d+)')
+    # X['year'] = X['year'].astype('int')
+    # X['year'] = X['year'].fillna(-999)
     X['balcony'] = X['balcony'].str.contains('балконом').astype('int')
     X['house_type'] = X['house_type'].apply(lambda s: s.split(' дом')[0])
     X['parking'] = X['parking'].str.contains('выделенным парковочным местом').astype('int')
-    X['year'] = X['year'].fillna(-999)
     X['area_kitchen'] = X['area_kitchen'].fillna(-999)
-    X['year'] = X['year'].astype('int')
     X['first_floor'] = (X['floor'] == 1).astype(int)
     X['last_floor'] = (X['floor'] == X['number_of_floors']).astype(int)
     X['is_new'] = X['condition'].str.contains('Новостройка').astype('int')
@@ -114,8 +114,7 @@ def get_ppipeline():
                   'number_of_floors',
                   'number_of_rooms',
                   'area_total',
-                  'area_kitchen',
-                  'year']
+                  'area_kitchen']
 
     col_transformer = make_column_transformer(
         (OneHotEncoder(sparse=False, handle_unknown='ignore'), one_hot_cols),

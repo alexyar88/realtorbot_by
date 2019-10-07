@@ -118,9 +118,13 @@ header .logo {
   margin-left: var(--global-padding);
 }
 
-.logo a, .logo a:visited, .logo a:hover, .logo a:active {
+a, a:visited, a:hover, a:active {
     color: black;
     text-decoration: none;
+}
+
+.footer-block a, .footer-block a:visited, .footer-block a:hover, .footer-block a:active {
+    color: white;
 }
 
 header .email {
@@ -146,6 +150,14 @@ h6 {
   /* FONT */
   font-size: 1rem;
   font-weight: var(--main-font-light);
+}
+
+#map {
+ max-height: 56rem
+}
+
+.result {
+    margin-bottom:0.5rem
 }
 
 .article {
@@ -221,6 +233,10 @@ h6 {
   display: none;
 }
 
+.photo {
+  z-index: 10;
+}
+
 .photo img {
   width: 100%;
   height: 100%;
@@ -252,7 +268,7 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  z-index: -1;
+  z-index: 1;
 }
 
 .footer-block {
@@ -422,17 +438,16 @@ footer {
 }
 
 .photo-mobile {
-  display: inline-block;
-  position: absolute;
+  /* display: inline-block; */
+  /* position: absolute; */
   height: 200px;
-  
+  float: right;
+  width: 50%;
+  display: flex;
 }
 
 .photo-mobile img {
-  float: right;
-  width: 50%;
   height: 100%;
-  display: flex;
   object-fit: cover;
 }
 

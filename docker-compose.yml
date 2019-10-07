@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - "/Users/yaroshenko/Downloads/realtorbot-files/:/mounted/"
+    ports:
+      - "5000:5000"

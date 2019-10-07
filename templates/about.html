@@ -2,104 +2,90 @@
 <html>
 
 <head>
-  <title>О проекте</title>
+    <title>О проекте</title>
 
-  <meta charset="utf8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link href="style.css" type="text/css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700|Space+Mono:400,700&display=swap"
-    rel="stylesheet">
+    <link href="/static/style.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700|Space+Mono:400,700&display=swap"
+          rel="stylesheet">
 
 </head>
 
 <body>
 
-  <div class="page-container container-about">
+<div class="page-container container-about">
 
     <header>
-
-      <div class="logo">
-        <p>RealtorBot</p>
-      </div>
-      <div class="email">
-        <p>hello@realtorbot.by</p>
-      </div>
-
+        {%include 'header-menu.html' %}
     </header>
 
     <main>
 
-      <div class="grid secondary-grid">
+        <div class="grid secondary-grid">
 
-        <div class="left-column">
-          <h1>О проекте</h1>
+            <div class="left-column">
+                <h1>О проекте</h1>
 
-          <p>Сервис сделал Алексей Ярошенко, чтобы ему было что показать, когда он будет устраиваться на позицию Data
-            Scientist или
-            Machine Learning Engineer. Открыт предложениям :)
-          </p>
-          <h6>Контакты:</h6>
+                <p>Сервис сделал Алексей Ярошенко, чтобы ему было что показать, когда он будет устраиваться на позицию Data
+                    Scientist или
+                    Machine Learning Engineer. Открыт предложениям :)
+                </p>
+                <p>
+                    Upd: уже устроился, работаю
+                </p>
+                <h6>Контакты:</h6>
 
-          <ul class="developer-contacts-ul">
-            <li>Facebook</li>
-            <li>LinkedIn</li>
-            <li id="main-color">Telegram</li>
-            <li>Email</li>
-          </ul>
+                <ul class="developer-contacts-ul">
+                    <!--<li>Facebook</li>-->
+                    <!--<li>LinkedIn</li>-->
+                    <!--<li id="main-color">Telegram</li>-->
+                    <!--<li>Email</li>-->
 
-          <h6>Как родилась идея: история одной боли</h6>
-          <p class="article">Однажды мы хотели продать квартиру и пригласили риэлтора. Он придрадся к каждому плинтусу и
-            «забыл» про все
-            плюсы.
-            Говорил, что наша квартира ужасна и продать её будет невероятной удачей. Стоимость озвучил на 15–20% ниже
-            рыночной и то
-            «только для нас». Оказалось, что его комиссия фиксированная и не зависит от стоимости, а продать дёшево ему
-            просто
-            быстрее и легче, а значит быстрее и легче можно получить свои деньги. <br> Квартиру в итоге решили не
-            продавать, но осадочек остался. А чтобы с вами случайно не произошло похожей истории — сделал
-            этот сервис.</p>
+                    <li><a href="https://www.facebook.com/alexey.yaroshenko" target="_blank">Facebook</a></li>
+                    <!--<li><a href="https://vk.com/aleksey.yaroshenko" target="_blank">VK</a></li>-->
+                    <li><a href="https://www.linkedin.com/in/alekseyyaroshenko/" target="_blank">LinkedIn</a></li>
+                    <li id="last-share-element"><a href="https://t.me/yaroshenko" target="_blank">Telegram</a></li>
+                    <li><a href="mailto:hello@realtorbot.by">Email</a></li>
+                </ul>
 
-          <p class="designer">Дизайн и вёрстка: muzhevskaya</p>
+                <h6>Как родилась идея: история одной боли</h6>
+                <p class="article">Однажды мы хотели продать квартиру и пригласили риэлтора. Он придрадся к каждому плинтусу и
+                    «забыл» про все
+                    плюсы.
+                    Говорил, что наша квартира ужасна и продать её будет невероятной удачей. Стоимость озвучил на 15–20% ниже
+                    рыночной и то
+                    «только для нас». Оказалось, что его комиссия фиксированная и не зависит от стоимости, а продать дёшево ему
+                    просто
+                    быстрее и легче, а значит быстрее и легче можно получить свои деньги. <br> Квартиру в итоге решили не
+                    продавать, но осадочек остался. А чтобы с вами случайно не произошло похожей истории — сделал
+                    этот сервис.</p>
+
+                <p class="designer">Дизайн и вёрстка: muzhevskaya</p>
+
+            </div>
+
+            <div class="photo">
+                <img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>
+            </div>
+
 
         </div>
-
-        <div class="photo">
-          <img src="images/yaroshenko.jpg" alt="Aleksey Yaroshenko" />
-        </div>
-
-
-      </div>
 
     </main>
 
 
     <footer>
 
-      <div class="photo-mobile">
-        <img src="images/yaroshenko.jpg" alt="Aleksey Yaroshenko" />
-      </div>
+        <div class="photo-mobile">
+            <img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>
+        </div>
 
-      <nav>
-        <p id="selected">О проекте</p>
-        <p>API</p>
-      </nav>
-
-      <div class="footer-block">
-        <p class="footer-share">Поделиться</p>
-
-        <ul>
-          <li>Facebook</li>
-          <li>VK</li>
-          <li>LinkedIn</li>
-          <li>Telegram</li>
-        </ul>
-
-        <p class="copyright">&copy; RealtorBot 2019</p>
-      </div>
+        {%include 'footer-menu.html' %}
 
     </footer>
-  </div>
+</div>
 
 </body>
 

@@ -43,7 +43,7 @@
                     <input type="text" name="adress" id="address">
                     <input type="hidden" name="latitude" id="latitude">
                     <input type="hidden" name="longitude" id="longitude">
-                    <button class="start-button" name="button" id="submit">Оценить</button>
+                    <button class="start-button" name="button" id="submit" disabled>Оценить</button>
                 </div>
 
             </div>
@@ -79,7 +79,8 @@
             if (lat && long && address) {
                 location.href = '/price?lat=' + lat + '&long=' + long + '&address=' + address
             }
-        })
+        });
+        $('#address').focus()
     });
 </script>
 
@@ -119,6 +120,7 @@
 				var latlng = geo.geometry.getCoordinates();
 				document.getElementById('latitude').value = latlng[0];
 				document.getElementById('longitude').value = latlng[1];
+				$('#submit').prop("disabled", false)
 
 				<!--console.log(geo.properties.get('name'))-->
 

@@ -181,6 +181,12 @@ button {
   font-size: 1.875rem;
 }
 
+button:disabled {
+    color: black;
+    border: 3px black solid;
+    opacity: 0.4;
+}
+
 /* -----SELECT----- */
 
 select {

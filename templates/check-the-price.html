@@ -32,9 +32,8 @@
 
             <div class="left-column">
 
-                <p class="big-margin-bottom-p">База данных объявлений о продаже квартир автоматически обновляется каждую
-                    неделю. Чем больше параметров вы укажете, тем
-                    точнее получится оценка. Адрес дома нужно заполнить обязательно
+                <p class="big-margin-bottom-p">Нейросеть обучается на свежих данных каждую неделю, прогноз цены будет близок к актуальному. Чем больше параметров вы укажете, тем
+                    точнее получится оценка.
                 </p>
 
                 <form id="main-form">
@@ -44,44 +43,44 @@
                         <label for="address">Адрес дома <span class="superscript">*</span></label>
                         <br>
                         <input type="text" name="address" id="address" value="{{address}}">
-                        <input type="hidden" name="latitude" id="latitude" value="{{lat}}">
-                        <input type="hidden" name="longitude" id="longitude" value="{{long}}">
+                        <input type="hidden" name="latitude" id="latitude" value="{{lat}}" required>
+                        <input type="hidden" name="longitude" id="longitude" value="{{long}}" required>
                     </div>
 
 
-                    <div class="grid-element year-field">
-                        <label for="year">Год постройки</label>
-                        <br>
-                        <select class="custom-select" name="year" id="year">
-                            <option disabled selected>Выберите год</option>
-                            <option value="1915">1920е и раньше</option>
-                            <option value="1925">1920е – 1930e</option>
-                            <option value="1935">1930е – 1940e</option>
-                            <option value="1945">1940е – 1950e</option>
-                            <option value="1955">1950е – 1960e</option>
-                            <option value="1965">1960е – 1970e</option>
-                            <option value="1975">1970е – 1980e</option>
-                            <option value="1985">1980е – 1990e</option>
-                            <option value="1995">1990е – 2000e</option>
-                            <option value="2005">2000е – 2010e</option>
-                            <option value="2015">2010е – 2020e</option>
-                        </select>
-                        <p>Ориентировочно</p>
-                    </div>
+                    <!--<div class="grid-element year-field">-->
+                        <!--<label for="year">Год постройки</label>-->
+                        <!--<br>-->
+                        <!--<select class="custom-select" name="year" id="year">-->
+                            <!--<option disabled selected>Выберите год</option>-->
+                            <!--<option value="1915">1920е и раньше</option>-->
+                            <!--<option value="1925">1920е – 1930e</option>-->
+                            <!--<option value="1935">1930е – 1940e</option>-->
+                            <!--<option value="1945">1940е – 1950e</option>-->
+                            <!--<option value="1955">1950е – 1960e</option>-->
+                            <!--<option value="1965">1960е – 1970e</option>-->
+                            <!--<option value="1975">1970е – 1980e</option>-->
+                            <!--<option value="1985">1980е – 1990e</option>-->
+                            <!--<option value="1995">1990е – 2000e</option>-->
+                            <!--<option value="2005">2000е – 2010e</option>-->
+                            <!--<option value="2015">2010е – 2020e</option>-->
+                        <!--</select>-->
+                        <!--<p>Ориентировочно</p>-->
+                    <!--</div>-->
 
-                    <div class="grid-element exact-year-field">
-                        <label for="exact-year">Точный год</label>
-                        <br>
-                        <input type="number" name="exact-year" id="exact-year" placeholder="xxxx">
-                        <p>Если знаете, прогноз будет точнее</p>
-                    </div>
+                    <!--<div class="grid-element exact-year-field">-->
+                        <!--<label for="exact-year">Точный год</label>-->
+                        <!--<br>-->
+                        <!--<input type="number" name="exact-year" id="exact-year" placeholder="xxxx">-->
+                        <!--<p>Если знаете, прогноз будет точнее</p>-->
+                    <!--</div>-->
 
 
                     <div class="grid-element number-of-rooms-field">
-                        <label for="number-of-rooms">Количество комнат</label>
+                        <label for="number-of-rooms">Количество комнат <span class="superscript">*</span></label>
                         <br>
                         <span class="toggle-buttons" id="number-of-rooms">
-                            <input type="radio" name="rooms" value="1" id="room1">
+                            <input type="radio" name="rooms" value="1" id="room1" required>
                             <label for="room1"> 1 </label>
 
                             <input type="radio" name="rooms" value="2" id="room2">
@@ -98,23 +97,23 @@
 
                     <div class="grid-element floor-fields">
                         <div class="floor-field">
-                            <label for="floor">Этаж</label>
+                            <label for="floor">Этаж <span class="superscript">*</span></label>
                             <br>
-                            <input type="number" name="floor" id="floor">
+                            <input type="number" name="floor" id="floor" required>
                         </div>
 
                         <div class="floor-num-field">
-                            <label for="floor-num">Этажность дома</label>
+                            <label for="floor-num">Этажность дома <span class="superscript">*</span></label>
                             <br>
-                            <input type="number" name="number-of-floors" id="floor-num">
+                            <input type="number" name="number-of-floors" id="floor-num" required>
                         </div>
                     </div>
 
                     <div class="grid-element type-of-house-field">
-                        <label for="type-of-house">Тип дома</label>
+                        <label for="type-of-house">Тип дома <span class="superscript">*</span></label>
                         <br>
                         <span class="toggle-buttons" id="type-of-house">
-                            <input type="radio" name="house-type" value="panel" id="type1">
+                            <input type="radio" name="house-type" value="panel" id="type1" required>
                             <label for="type1">Панельный</label>
 
                             <input type="radio" name="house-type" value="brick" id="type2">
@@ -131,7 +130,7 @@
 
                     <div class="grid-element states">
                         <div class="state-field">
-                            <label for="state">Состояние</label>
+                            <label for="state">Состояние <span class="superscript">*</span></label>
                             <br>
                             <span class="toggle-buttons" id="state">
                                 <input type="radio" name="is-new" value="0" id="state1">
@@ -151,9 +150,9 @@
 
                     <div class="grid-element area-fields">
                         <div class="flat-area-field">
-                            <label for="flat-area">Площадь квартиры</label>
+                            <label for="flat-area">Площадь квартиры <span class="superscript">*</span></label>
                             <br>
-                            <input type="number" name="area-total" id="flat-area">
+                            <input type="number" name="area-total" id="flat-area" required>
                             <span class="unit">м <span class="superscript">2</span></span>
                         </div>
 
@@ -189,7 +188,7 @@
 
                 <div id="result-block">
                     <p>Оцениваем в</p>
-                    <h1>~<span id="result">...</span> $</h1>
+                    <h1 class="result">~<span id="result">...</span> $</h1>
                     <p><span id="square-price">...</span> $/м<span class="superscript">2</span></p>
 
                     <!--<p>Дороже 40% квартир на рынке</p>-->
@@ -199,8 +198,8 @@
 
             </div>
 
-            <div class="photo">
-                <img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>
+            <div class="photo" id="map">
+                <!--<img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>-->
             </div>
 
         </div>
@@ -210,7 +209,7 @@
     <footer>
 
         <div class="photo-mobile">
-            <img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>
+            <!--<img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>-->
         </div>
 
         {%include 'footer-menu.html' %}
@@ -231,24 +230,34 @@
 	function init() {
 
 
-		<!--var myMap = new ymaps.Map('map', {-->
-			<!--center: [53.90210688, 27.56172538],-->
-			<!--zoom: 11,-->
-			<!--controls: [],-->
+		var myMap = new ymaps.Map('map', {
+			center: [53.90210688, 27.56172538],
+			zoom: 11,
+			controls: [],
 
 
-		<!--}, {-->
-			<!--suppressMapOpenBlock: true,-->
-			<!--maxZoom: 11,-->
-			<!--minZoom: 11,-->
-			<!--yandexMapDisablePoiInteractivity: true,-->
+		}, {
+			suppressMapOpenBlock: true,
+			maxZoom: 11,
+			minZoom: 11,
+			yandexMapDisablePoiInteractivity: true,
 			<!--restrictMapArea: true,-->
-		<!--});-->
+		});
 
 
 		var suggestView = new ymaps.SuggestView('address', {
 			boundedBy: [[53.820922446131, 27.344970703125], [53.97547425743, 27.77961730957]]
 		})
+
+		var lat = document.getElementById('latitude').value
+		var lng = document.getElementById('longitude').value
+
+		placemark = new ymaps.Placemark([lat, lng], {}, {
+					preset: 'islands#blueHomeIcon',
+					iconColor: '#007bff'
+				});
+		myMap.geoObjects.add(placemark);
+		myMap.setCenter([lat, lng], 14)
 
 
 		suggestView.events.add('select', function (event) {
@@ -262,16 +271,17 @@
 
 				<!--console.log(geo.properties.get('name'))-->
 
-				<!--if (placemark) {-->
-					<!--myMap.geoObjects.remove(placemark);-->
-				<!--}-->
+				if (placemark) {
+					myMap.geoObjects.remove(placemark);
+				}
 
-				<!--placemark = new ymaps.Placemark(latlng, {}, {-->
-					<!--preset: 'islands#blueHomeIcon',-->
-					<!--iconColor: '#007bff'-->
-				<!--});-->
+				placemark = new ymaps.Placemark(latlng, {}, {
+					preset: 'islands#blueHomeIcon',
+					iconColor: '#007bff'
+				});
 
-				<!--myMap.geoObjects.add(placemark);-->
+				myMap.geoObjects.add(placemark);
+				myMap.setCenter(latlng, 14)
 
 
 				<!--$('#map-container').show()-->
