@@ -9,6 +9,9 @@
 /* .container-about */
   --container-about-min-height: 900px;
 
+/* .container-form */
+  --container-from-min-height: 2000px;
+
 /* .main, grid */
   --main-top: 30px;
   --main-bottom: 55px;
@@ -94,8 +97,8 @@ html {
   min-height: var(--container-about-min-height);
 }
 
-.container-form {
-  min-height: 2000px;
+.container-form {
+    min-height: var(--container-from-min-height);
 }
 
 main {
@@ -158,6 +161,36 @@ h6 {
 
 .result {
     margin-bottom:0.5rem
+}
+
+.price-block {
+  margin-top: 5rem;
+}
+
+.price-block .price-value-title {
+  /* FONT */
+  font-family: var(--main-font);
+  font-size: 1.5rem;
+}
+
+.price-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 8% 92%;
+  width: 100%;
+}
+
+.price-additional-info {
+  margin-top: -30px;
+  margin-bottom: 10px;
+
+  /* FONT */
+  font-weight: var(--main-font-bold);
+  font-size: 1.5rem;
+}
+
+.price-compare {
+  font-weight: var(--main-font-light);
 }
 
 .article {
@@ -365,6 +398,9 @@ footer {
   --container-min-height: 650px;
   --container-about-min-height: 800px;
 
+/* .container-form */
+  --container-from-min-height: 1500px;
+
 /* h1 */
   --h1-height: 80px;
 
@@ -473,6 +509,9 @@ footer {
 /* .container */
   --container-min-height: 800px;
   --container-about-min-height: 850px;
+
+/* .container-form */
+  --container-from-min-height: 1550px;
 
 /* h1 */
   --h1-height: 170px;

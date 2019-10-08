@@ -32,7 +32,7 @@
 
             <div class="left-column">
 
-                <p class="big-margin-bottom-p">Нейросеть обучается на свежих данных каждую неделю, прогноз цены будет близок к актуальному. Чем больше параметров вы укажете, тем
+                <p class="">Нейросеть обучается на свежих данных каждую неделю, прогноз цены будет близок к актуальному. Чем больше параметров вы укажете, тем
                     точнее получится оценка.
                 </p>
 
@@ -49,30 +49,30 @@
 
 
                     <!--<div class="grid-element year-field">-->
-                        <!--<label for="year">Год постройки</label>-->
-                        <!--<br>-->
-                        <!--<select class="custom-select" name="year" id="year">-->
-                            <!--<option disabled selected>Выберите год</option>-->
-                            <!--<option value="1915">1920е и раньше</option>-->
-                            <!--<option value="1925">1920е – 1930e</option>-->
-                            <!--<option value="1935">1930е – 1940e</option>-->
-                            <!--<option value="1945">1940е – 1950e</option>-->
-                            <!--<option value="1955">1950е – 1960e</option>-->
-                            <!--<option value="1965">1960е – 1970e</option>-->
-                            <!--<option value="1975">1970е – 1980e</option>-->
-                            <!--<option value="1985">1980е – 1990e</option>-->
-                            <!--<option value="1995">1990е – 2000e</option>-->
-                            <!--<option value="2005">2000е – 2010e</option>-->
-                            <!--<option value="2015">2010е – 2020e</option>-->
-                        <!--</select>-->
-                        <!--<p>Ориентировочно</p>-->
+                    <!--<label for="year">Год постройки</label>-->
+                    <!--<br>-->
+                    <!--<select class="custom-select" name="year" id="year">-->
+                    <!--<option disabled selected>Выберите год</option>-->
+                    <!--<option value="1915">1920е и раньше</option>-->
+                    <!--<option value="1925">1920е – 1930e</option>-->
+                    <!--<option value="1935">1930е – 1940e</option>-->
+                    <!--<option value="1945">1940е – 1950e</option>-->
+                    <!--<option value="1955">1950е – 1960e</option>-->
+                    <!--<option value="1965">1960е – 1970e</option>-->
+                    <!--<option value="1975">1970е – 1980e</option>-->
+                    <!--<option value="1985">1980е – 1990e</option>-->
+                    <!--<option value="1995">1990е – 2000e</option>-->
+                    <!--<option value="2005">2000е – 2010e</option>-->
+                    <!--<option value="2015">2010е – 2020e</option>-->
+                    <!--</select>-->
+                    <!--<p>Ориентировочно</p>-->
                     <!--</div>-->
 
                     <!--<div class="grid-element exact-year-field">-->
-                        <!--<label for="exact-year">Точный год</label>-->
-                        <!--<br>-->
-                        <!--<input type="number" name="exact-year" id="exact-year" placeholder="xxxx">-->
-                        <!--<p>Если знаете, прогноз будет точнее</p>-->
+                    <!--<label for="exact-year">Точный год</label>-->
+                    <!--<br>-->
+                    <!--<input type="number" name="exact-year" id="exact-year" placeholder="xxxx">-->
+                    <!--<p>Если знаете, прогноз будет точнее</p>-->
                     <!--</div>-->
 
 
@@ -177,7 +177,8 @@
                     </div>
 
                     <div class="grid-element button-field">
-                        <button name="button" type="button" id="submit-button"><span id="button-text">Оценить стоимость</span><img src="/static/images/loader.svg" id="loader" style="display: none; width: 3.2rem"></button>
+                        <button name="button" type="button" id="submit-button"><span id="button-text">Оценить стоимость</span><img src="/static/images/loader.svg" id="loader" style="display: none; width: 3.2rem">
+                        </button>
 
 
                         <!--<p>0 из 11 параметров заданы</p>-->
@@ -186,23 +187,33 @@
                 </form>
 
 
-                <div id="result-block">
-                    <p>Оцениваем в</p>
-                    <h1 class="result">~<span id="result">...</span> $</h1>
-                    <p><span id="square-price">...</span> $/м<span class="superscript">2</span></p>
+                <div id="result-block" class="price-block">
+                    <p class="price-value-title">Оцениваем в</p>
+                    <div class="price-grid">
+                        <div class="tilda"><h1>~</h1></div>
+                        <div class="price-left-alignment">
+                        <h1 class="result"><span id="result">...</span> $</h1>
+                            <p class="price-additional-info">
+                                <span id="square-price">...</span> $/м<span class="superscript">2</span> 
+                                <span class="price-compare"> — дороже 40 квартир на рынке</span>
+                            </p>
+                        </div>
 
-                    <!--<p>Дороже 40% квартир на рынке</p>-->
 
+                        <!--<p><span id="square-price">...</span> $/м<span class="superscript">2</span></p>-->
+
+                        <!--<p>Дороже 40% квартир на рынке</p>-->
+
+
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="photo" id="map">
+                    <!--<img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>-->
+                </div>
 
-            <div class="photo" id="map">
-                <!--<img src="/static/images/yaroshenko.jpg" alt="Aleksey Yaroshenko"/>-->
             </div>
-
-        </div>
 
     </main>
 
@@ -296,6 +307,8 @@
 
 
 
+
+
 </script>
 
 
@@ -329,6 +342,8 @@
 
         $('#address').focus()
     })
+
+
 
 
 
