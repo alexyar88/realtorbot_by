@@ -60,8 +60,12 @@ form .floor-num-field {
 form .type-of-house-field {
   grid-column-start: 1;
   grid-column-end: span 4;
+
 }
 
+.type-of-house-mobile-field {
+  display: none;
+}
 form .states {
   grid-column-start: 1;
   grid-column-end: span 4;
