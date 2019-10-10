@@ -191,6 +191,11 @@ button:disabled {
     opacity: 0.4;
 }
 
+button:disabled img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
 /* -----SELECT----- */
 
 select {

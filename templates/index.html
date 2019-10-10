@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <title>RealtorBot</title>
+    <title>Оцени стоимость квартиры в Минске онлайн - RealtorBot.by</title>
+    <meta name="description" content="Узнайте цену продажи квартиры за 60 секунд. Калькулятор оценивает квартиру с помощью нейросети. Зайдите и оцените!">
 
     <meta charset="utf8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,6 +12,8 @@
     <link href="/static/form-style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700|Space+Mono:400,700&display=swap"
           rel="stylesheet">
+
+    {%include 'head-meta.html' %}
 
 </head>
 
@@ -43,7 +46,9 @@
                     <input type="text" name="adress" id="address">
                     <input type="hidden" name="latitude" id="latitude">
                     <input type="hidden" name="longitude" id="longitude">
-                    <button class="start-button" name="button" id="submit" disabled>Оценить</button>
+                    <button class="start-button" name="button" id="submit" disabled>
+                        <img src="/static/images/arrow.svg">
+                    </button>
                 </div>
 
             </div>

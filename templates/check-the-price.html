@@ -2,7 +2,8 @@
 <html>
 
 <head>
-	<title>RealtorBot</title>
+    <title>Калькулятор стоимость квартиры в Минске - RealtorBot.by</title>
+    <meta name="description" content="Узнайте цену продажи квартиры за 60 секунд. Калькулятор оценивает квартиру с помощью нейросети. Зайдите и оцените!">
 
 	<meta charset="utf8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,6 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700|Space+Mono:400,700&display=swap"
 	      rel="stylesheet">
 
+	{%include 'head-meta.html' %}
 </head>
 
 <body>
@@ -130,14 +132,14 @@
 					<div class="grid-element type-of-house-mobile-field">
 						<label for="year">Тип дома  <span class="superscript">*</span></label>
 						<br>
-						<select class="custom-select" name="year" id="year">
+						<select class="custom-select" name="house-type" id="year">
 							<option disabled selected>Выбрать</option>
 							<option value="panel">Панельный</option>
 							<option value="brick">Кирпичный</option>
 							<option value="block">Блочный</option>
 							<option value="monolit">Монолитный</option>
 						</select>
-						<p>Ориентировочно</p>
+						<!--<p>Ориентировочно</p>-->
 					</div>
 
 
@@ -271,6 +273,7 @@
 
 	ymaps.ready(init);
 	var placemark = false;
+	var placemark2 = false;
 
 	function init() {
 
@@ -314,10 +317,16 @@
             iconImageHref: '/static/images/pointer.png',
             iconImageSize: [24, 24],
 		});
+
+		placemark2 = new ymaps.Placemark([lat, lng], {}, {
+	        iconLayout: 'default#image',
+            iconImageHref: '/static/images/pointer.png',
+            iconImageSize: [24, 24],
+		});
 		myMap.geoObjects.add(placemark);
 		myMap.setCenter([lat, lng], 14)
 
-		myMap2.geoObjects.add(placemark);
+		myMap2.geoObjects.add(placemark2);
 		myMap2.setCenter([lat, lng], 14)
 
 
@@ -335,7 +344,17 @@
 					myMap.geoObjects.remove(placemark);
 				}
 
+				if (placemark2) {
+					myMap2.geoObjects.remove(placemark2);
+				}
+
 				placemark = new ymaps.Placemark(latlng, {}, {
+		            iconLayout: 'default#image',
+                    iconImageHref: '/static/images/pointer.png',
+                    iconImageSize: [24, 24],
+				});
+
+			    placemark2 = new ymaps.Placemark(latlng, {}, {
 		            iconLayout: 'default#image',
                     iconImageHref: '/static/images/pointer.png',
                     iconImageSize: [24, 24],
@@ -344,7 +363,7 @@
 				myMap.geoObjects.add(placemark);
 				myMap.setCenter(latlng, 14);
 
-				myMap2.geoObjects.add(placemark);
+				myMap2.geoObjects.add(placemark2);
 				myMap2.setCenter(latlng, 14);
 
 				console.log(latlng);

@@ -238,7 +238,7 @@ h6 {
 
 .address-grid {
     display: grid;
-    grid-template-columns: 5fr 3fr;
+    grid-template-columns: 10fr 1fr;
     grid-column-gap: 10px;
     width: 100%;
     position: relative;
@@ -342,7 +342,7 @@ footer {
 .footer-block li {
   display: inline-block;
   padding-right: 40px;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 
 #last-share-element {
@@ -527,7 +527,7 @@ footer {
 * {
 /* container */
   --container-min-height: 800px;
-  --container-about-min-height: 850px;
+  --container-about-min-height: 950px;
 
 /* container-form */
   --container-from-min-height: 1550px;
