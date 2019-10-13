@@ -25,18 +25,23 @@ form .adress-field {
 }
 
 form .year-field {
-  grid-column-start: 1;
-  grid-column-end: span 2;
+  /* grid-column-start: 1;
+  grid-column-end: span 2; */
+}
+
+form .year-field label {
+    display: inline-block;
+    margin-top: 2px;
 }
 
 form .exact-year-field {
-  grid-column-start: 3;
+  grid-column-start: 5;
   grid-column-end: span 1;
 }
 
 form .number-of-rooms-field {
   grid-column-start: 1;
-  grid-column-end: span 2;
+  grid-column-end: span 3;
   /* display: inline-block;
   width: 60%;
   margin-right: var(--grid-form-gap); */
@@ -44,9 +49,10 @@ form .number-of-rooms-field {
 
 
 form .floor-fields {
-  grid-column-start: 3;
+  grid-column-start: 1;
   grid-column-end: span 2;
 }
+
 
 form .floor-field { 
   display: inline-block;

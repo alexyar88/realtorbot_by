@@ -27,7 +27,7 @@ def predict_price():
     house_type = request.form.get('house-type')
     balcony = int(1 if request.form.get('balcony') else 0)
     parking = int(1 if request.form.get('parking') else 0)
-    # year = int(request.form.get('exact-year') if request.form.get('exact-year') else request.form.get('year'))
+    year = int(request.form.get('year') if request.form.get('year') else -999)
     first_floor = int(floor == 1)
     last_floor = int(floor == number_of_floors)
     is_new = int(request.form.get('is-new'))
@@ -44,7 +44,7 @@ def predict_price():
         house_type,
         balcony,
         parking,
-        # year,
+        year,
         first_floor,
         last_floor,
         is_new,
@@ -54,14 +54,14 @@ def predict_price():
     print(X_arr)
 
     columns = ['latitude', 'longitude', 'floor', 'number_of_floors', 'number_of_rooms',
-       'area_total', 'area_kitchen', 'house_type', 'balcony', 'parking', 'first_floor', 'last_floor',
+       'area_total', 'area_kitchen', 'house_type', 'balcony', 'parking', 'year', 'first_floor', 'last_floor',
        'is_new', 'renovation']
 
 
 
     X = pd.DataFrame([X_arr], columns=columns)
     model = joblib.load(model_path + 'pipeline.pkl')
-    price = model.predict(X)[0]  # обычно, 5% в среднем скидывает продавец
+    price = model.predict(X)[0] * 0.96  # обычно, 4% в среднем скидывает продавец
 
 
     return jsonify({

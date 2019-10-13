@@ -20,7 +20,7 @@
 </head>
 
 <body>
-
+    {%include 'after-body-open.html' %}
 <div class="container-form page-container container-form2">
 
 	<header>
@@ -73,12 +73,7 @@
 					<!--<p>Ориентировочно</p>-->
 					<!--</div>-->
 
-					<!--<div class="grid-element exact-year-field">-->
-					<!--<label for="exact-year">Точный год</label>-->
-					<!--<br>-->
-					<!--<input type="number" name="exact-year" id="exact-year" placeholder="xxxx">-->
-					<!--<p>Если знаете, прогноз будет точнее</p>-->
-					<!--</div>-->
+
 
 
 					<div class="grid-element number-of-rooms-field">
@@ -100,17 +95,25 @@
 					</div>
 
 
+					<div class="grid-element year-field">
+
+						<label for="exact-year">Год постройки</label>
+						<br>
+						<input type="number" name="year" id="exact-year" inputmode="numeric" pattern="[0-9]*" placeholder="xxxx">
+						<!--<p>Если знаете, прогноз будет точнее</p>-->
+
+					</div>
 					<div class="grid-element floor-fields">
 						<div class="floor-field">
 							<label for="floor">Этаж <span class="superscript">*</span></label>
 							<br>
-							<input type="number" name="floor" id="floor" required>
+							<input type="number" name="floor" id="floor" pattern="[0-9]*" inputmode="numeric" min="1" required>
 						</div>
 
-						<div class="floor-num-field">
+						<div class="floor-field">
 							<label for="floor-num">Этажность дома <span class="superscript">*</span></label>
 							<br>
-							<input type="number" name="number-of-floors" id="floor-num" required>
+							<input type="number" name="number-of-floors" min="1" pattern="[0-9]*" inputmode="numeric" id="floor-num" required>
 						</div>
 					</div>
 
@@ -170,14 +173,14 @@
 						<div class="flat-area-field">
 							<label for="flat-area">Площадь квартиры <span class="superscript">*</span></label>
 							<br>
-							<input type="number" name="area-total" id="flat-area" required>
+							<input type="number" name="area-total" id="flat-area" step="0.1" min="0" inputmode="decimal" required>
 							<span class="unit">м <span class="superscript">2</span></span>
 						</div>
 
 						<div class="kitchen-area-field">
 							<label for="kitchen-area">Площадь кухни</label>
 							<br>
-							<input type="number" name="area-kitchen" id="kitchen-area">
+							<input type="number" name="area-kitchen" step="0.1" min="0" inputmode="decimal" id="kitchen-area">
 							<span class="unit">м <span class="superscript">2</span></span>
 						</div>
 					</div>

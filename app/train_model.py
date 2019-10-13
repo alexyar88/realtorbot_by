@@ -9,7 +9,8 @@ from pathlib import Path
 
 from custom_transformer import CustomTransformer
 from sklearn.ensemble import RandomForestRegressor, VotingRegressor
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.compose import make_column_transformer, ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -48,21 +49,30 @@ def get_X_y():
 
     for file_name in os.listdir(csv_path):
         path = csv_path + file_name
-        if os.path.isfile(path):
+        if os.path.isfile(path) and path[-4:] == '.csv':
             files_with_dates.append((os.path.getmtime(path), path))
 
     files_with_dates.sort(key=lambda el: el[0], reverse=True)
-    last_files = list(map(lambda x: x[1], files_with_dates[:8]))
+    last_files = list(map(lambda x: x[1], files_with_dates))
 
     dfs_to_concat = []
 
     for file in last_files:
-        dfs_to_concat.append(pd.read_csv(file, delimiter=';'))
+        dfs_to_concat.append(pd.read_csv(file, sep=';'))
+
+    # for part in dfs_to_concat:
+    #     if part.columns[0] != 'id':
+    #         print(part.columns)
+
 
     df = pd.concat(dfs_to_concat)
     df.drop_duplicates('id', inplace=True)
 
+
+
     df = df.rename(columns={'option1': 'condition', 'option2': 'house_type', 'option3': 'balcony', 'option4': 'parking'})
+
+
 
     df = preprocess_data(df)
 
@@ -79,15 +89,15 @@ def get_X_y():
 
 
 def preprocess_data(X):
-    # X['year'] = X['house_type'].str.extract('(\d+)')
-    # X['year'] = X['year'].astype('int')
-    # X['year'] = X['year'].fillna(-999)
+    X['year'] = X['house_type'].str.extract('(\d+)')
+    X['year'] = X['year'].fillna(-999)
+    X['year'] = X['year'].astype('int')
     X['balcony'] = X['balcony'].str.contains('балконом').astype('int')
     X['house_type'] = X['house_type'].apply(lambda s: s.split(' дом')[0])
     X['parking'] = X['parking'].str.contains('выделенным парковочным местом').astype('int')
     X['area_kitchen'] = X['area_kitchen'].fillna(-999)
     X['first_floor'] = (X['floor'] == 1).astype(int)
-    X['last_floor'] = (X['floor'] == X['number_of_floors']).astype(int)
+    X['last_floor'] = (X['floor'] == X['number_of_floors']).astype('int')
     X['is_new'] = X['condition'].str.contains('Новостройка').astype('int')
     X['renovation'] = X['condition'].str.contains('с ремонтом').astype('int')
     X['house_type'] = X['house_type'].replace({'Панельный': 'panel',
@@ -114,40 +124,49 @@ def get_ppipeline():
                   'number_of_floors',
                   'number_of_rooms',
                   'area_total',
-                  'area_kitchen']
+                  'area_kitchen',
+                  'year']
 
     col_transformer = make_column_transformer(
         (OneHotEncoder(sparse=False, handle_unknown='ignore'), one_hot_cols),
-        (MinMaxScaler(), scale_cols),
-        remainder='passthrough', verbose=True)
+        (StandardScaler(), scale_cols),
+        remainder='passthrough')
 
     lgbm = LGBMRegressor(learning_rate=0.02,
-                         num_leaves=41,
-                         n_estimators=2000,
-                         max_depth=10,
+                         num_leaves=101,
+                         n_estimators=1500,
+                         max_depth=None,
                          colsample_bytree=0.62,
                          reg_lambda=0.81)
-    rf = RandomForestRegressor(n_estimators=250, max_features=12, bootstrap=False, n_jobs=-1)
+
+    rf = RandomForestRegressor(n_estimators=300, max_features=12, bootstrap=False)
 
     xgb = XGBRegressor(learning_rate=0.02,
-                       num_leaves=41,
-                       n_estimators=2000,
-                       max_depth=10,
+                       num_leaves=101,
+                       n_estimators=400,
+                       max_depth=20,
                        colsample_bytree=0.62,
-                       reg_lambda=0.81,
-                       n_jobs=-1)
+                       reg_lambda=0.81)
+
+    knn = KNeighborsRegressor(n_neighbors=7,
+                              weights='distance',
+                              algorithm='brute',
+                              leaf_size=12,
+                              p=1,
+                              metric='minkowski')
 
     voter = VotingRegressor([
         ('rf', rf),
         ('lgbm', lgbm),
         ('xgb', xgb),
-    ], n_jobs=-1)
+        ('knn', knn),
+    ])
 
     pipeline = Pipeline([
         ('custom_transformer', CustomTransformer()),
         ('col_transformer', col_transformer),
         ('estimator', voter)
-    ], verbose=True)
+    ])
 
     return pipeline
 
