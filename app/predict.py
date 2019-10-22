@@ -19,7 +19,16 @@ model = joblib.load(model_path + 'pipeline.pkl')
 @predict.route('/predict', methods=['POST'])
 def predict_price():
 
-    if request.headers.get('Host') not in ['0.0.0.0:5000', '0.0.0.0:5001', 'realtorbot.by']:
+    referer = request.headers.get('Referer')
+    is_parser = True
+
+    for domain in ['0.0.0.0:5000', '0.0.0.0:5001', 'realtorbot.by']:
+        if referer and domain in referer:
+            is_parser = False
+            break
+
+
+    if is_parser:
         return abort(401)
 
     global model
