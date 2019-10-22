@@ -6,6 +6,7 @@ import joblib
 from bs4 import BeautifulSoup
 from datetime import datetime
 from pathlib import Path
+import predict
 
 from custom_transformer import CustomTransformer
 from sklearn.ensemble import RandomForestRegressor, VotingRegressor
@@ -41,6 +42,9 @@ def train_model_and_save():
     pipeline = get_ppipeline()
     pipeline.fit(X, y)
     joblib.dump(pipeline, model_path + 'pipeline.pkl')
+    predict.model = pipeline
+
+    return 'Model was successfully fitted'
 
 
 def get_X_y():
@@ -167,7 +171,6 @@ def get_ppipeline():
         ('col_transformer', col_transformer),
         ('estimator', voter)
     ])
-
     return pipeline
 
 if __name__ == "__main__":

@@ -1,3 +1,7 @@
+/data
+/ml_models
+/db
+
 .git
 .DS_Store
 .gitignore

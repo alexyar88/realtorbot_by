@@ -330,15 +330,15 @@
             iconImageSize: [24, 24],
 		});
 		myMap.geoObjects.add(placemark);
-		myMap.setCenter([lat, lng], 14)
+		myMap.setCenter([lat, lng], 14);
 
 		myMap2.geoObjects.add(placemark2);
-		myMap2.setCenter([lat, lng], 14)
+		myMap2.setCenter([lat, lng], 14);
 
 
 		suggestView.events.add('select', function (event) {
-			var address = event.get('item').value
-			document.getElementById('address').value = event.get('item').displayName
+			var address = event.get('item').value;
+			document.getElementById('address').value = event.get('item').displayName;
 			ymaps.geocode(address).then(function (res) {
 				var geo = res.geoObjects.get(0);
 				var latlng = geo.geometry.getCoordinates();
@@ -403,12 +403,17 @@
 						$('#result').text(res_text)
 						$('#square-price').text(square_text)
 						// alert(msg)
+					},
+					error: function () {
+						$('#button-text').show();
+						$('#loader').hide();
+						alert('Простите, пожалуйста, я уронил свой сервер :) Попробуйте, пожалуйста, еще раз через 30-40 секунд, когда мой сервер поднимется.')
 					}
 				});
 			} else {
 				alert('Заполните, пожалуйста, все поля и адрес')
 			}
-		})
+		});
 
 		$('#address').focus()
 	})
