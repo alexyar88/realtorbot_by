@@ -12,9 +12,9 @@ columns = ('id', 'author_id', 'address', 'user_address', 'latitude', 'longitude'
            'price_byn', 'price_usd')
 
 
-def parse_data_to_csv(csv_path, column_names=columns):
+def parse_data_to_csv(csv_dir, column_names=columns):
     time_string = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
-    result_csv_path = os.path.join(csv_path, f'onliner_minsk_{time_string}.csv')
+    result_csv_path = os.path.join(csv_dir, f'onliner_minsk_{time_string}.csv')
     with open(result_csv_path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerow(column_names)

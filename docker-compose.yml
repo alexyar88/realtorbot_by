@@ -4,6 +4,6 @@ services:
     build:
       context: .
     volumes:
-      - "/Users/yaroshenko/Downloads/realtorbot-files/:/mounted/"
+      - "/Users/yaroshenko/Documents/sites2/mounted:/mounted/"
     ports:
       - "5000:5000"

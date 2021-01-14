@@ -1,15 +1,12 @@
-from flask import Blueprint, render_template, request, jsonify, abort
+from flask import Blueprint, request, jsonify
 import pickle
 import os
-import sqlite3
 import utils
 
 predict = Blueprint('predict', __name__)
 
 model_dir = '../../mounted/model'
 pipeline_path = os.path.join(model_dir, 'pipeline.pkl')
-# with open(pipeline_path, 'rb') as file:
-#     pipeline = pickle.load(file)
 
 @predict.route('/predict', methods=['POST'])
 def predict_price():
@@ -46,43 +43,3 @@ def predict_price():
         'price_upper': price_upper * correction,
         'price_lower': price_lower * correction,
     })
-
-
-# @predict.route('/api/get_apartment_price', methods=['POST'])
-# def api_get_apartment_price():
-#     try:
-#         key = request.form.get('key')
-#         if not key:
-#             return abort(401)
-#
-#         conn = sqlite3.connect(db_path + 'realtorbot.db')
-#         cursor = conn.execute('SELECT * FROM api_users WHERE key=?', (key,))
-#
-#         api_user = cursor.fetchone()
-#
-#         if not api_user:
-#             return abort(401)
-#
-#     # return '1'
-#
-#         X = get_data_object_from_request(request)
-#         area_total = X['area_total'].values[0]
-#         global model
-#         if not model:
-#             model = joblib.load(model_path + 'pipeline.pkl')
-#
-#
-#
-#         price = model.predict(X)[0] * 0.96  # обычно, 4% в среднем скидывает продавец
-#
-#         if price:
-#             conn.execute('UPDATE api_users SET request_counter = cast(request_counter as INTEGER) + 1 WHERE key=?', (key,))
-#             conn.commit()
-#             conn.close()
-#     except:
-#         return abort(500)
-#
-#     return jsonify({
-#         'price': price,
-#         'm2_price': price / area_total
-#     })
