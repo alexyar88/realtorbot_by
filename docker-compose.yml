@@ -4,6 +4,6 @@ services:
     build:
       context: .
     volumes:
-      - "/Users/yaroshenko/Documents/sites2/mounted:/mounted/"
+      - "/home/ec2-user/mounted:/mounted/"
     ports:
       - "5000:5000"

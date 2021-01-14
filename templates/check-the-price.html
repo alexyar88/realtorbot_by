@@ -143,10 +143,10 @@
                         <br>
                         <select class="custom-select" name="house-type" id="year">
                             <option disabled selected>Выбрать</option>
-                            <option value="panel">Панельный</option>
-                            <option value="brick">Кирпичный</option>
-                            <option value="block">Блочный</option>
-                            <option value="monolit">Монолитный</option>
+                            <option value="Панельный">Панельный</option>
+                            <option value="Кирпичный">Кирпичный</option>
+                            <option value="Блочный">Блочный</option>
+                            <option value="Монолитный">Монолитный</option>
                         </select>
                         <!--<p>Ориентировочно</p>-->
                     </div>
@@ -227,11 +227,11 @@
                             <p class="price-additional-info">
                                 &mdash; C 80% вероятностью цена будет между <span id="price-lower">...</span> - <span id="price-upper">...</span> $
                             </p>
-                            <p>&nbsp;</p>
-                            <p class="price-additional-info">
-                                &mdash; Цена за квадрат: <span id="square-price">...</span> $/м<span class="superscript">2</span>
-                                <!--<span class="price-compare"> — дороже 40%квартир на рынке</span>-->
-                            </p>
+{#                            <p>&nbsp;</p>#}
+{#                            <p class="price-additional-info">#}
+{#                                &mdash; Цена за квадрат: <span id="square-price">...</span> $/м<span class="superscript">2</span>#}
+{#                                <!--<span class="price-compare"> — дороже 40%квартир на рынке</span>-->#}
+{#                            </p>#}
                         </div>
                     </div>
                 </div>
@@ -413,11 +413,11 @@
                         $('#button-text').show()
                         $('#loader').hide()
                         res_text = parseFloat(result.price).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
-                        square_text = parseFloat(result.square_price).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+                        {#square_text = parseFloat(result.square_price).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')#}
                         lower_text = parseFloat(result.price_lower).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
                         upper_text = parseFloat(result.price_upper).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
                         $('#result').text(res_text)
-                        $('#square-price').text(square_text)
+                        {#$('#square-price').text(square_text)#}
                         $('#price-lower').text(lower_text)
                         $('#price-upper').text(upper_text)
                         // alert(msg)
