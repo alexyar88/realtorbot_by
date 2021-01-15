@@ -31,7 +31,7 @@ def predict_price():
     X = utils.get_data_object_from_request(request)
     area_total = X['area_total'].values[0]
 
-    correction = 0.96  # common sale discount is 4%
+    correction = 0.87  # mean sale discount is 13% because of crisis
     price = pipeline.predict(X)[0]
     price_lower, price_upper = pipeline.predict(X, return_dist=True)[0].dist.interval(0.80)
 
