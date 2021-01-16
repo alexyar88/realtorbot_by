@@ -4,7 +4,7 @@ import pandas as pd
 def get_data_object_from_request(request):
     latitude = float(request.form.get('latitude'))
     longitude = float(request.form.get('longitude'))
-    resale = bool(1 - int(request.form.get('is-new')))
+    resale = False if request.form.get('is-new') is None else bool(1 - int(request.form.get('is-new')))
     floor = int(request.form.get('floor'))
     number_of_floors = int(request.form.get('number-of-floors'))
     rooms = int(request.form.get('rooms'))
@@ -12,7 +12,7 @@ def get_data_object_from_request(request):
     area_kitchen = float(request.form.get('area-kitchen') if request.form.get('area-kitchen') else None)
     house_material = request.form.get('house-type')
     year = int(request.form.get('year') if request.form.get('year') else None)
-    is_renovated = int(1 if request.form.get('is-renovated') else 0)
+    is_renovated = False if request.form.get('is-renovated') is None else bool(request.form.get('is-renovated'))
     condition = get_condition(resale=resale, is_renovated=is_renovated)
     house_type = get_house_type(house_material=house_material, year=year)
     balcony = 'С балконом (лоджией)' if request.form.get('balcony') else 'Без балкона (лоджии)'
